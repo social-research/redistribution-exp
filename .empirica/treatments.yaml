@@ -1,0 +1,57 @@
+factors:
+  - desc: the number of Players in a Game
+    name: playerCount
+    values:
+      - value: 2
+      - value: 4
+      - value: 24
+  - desc: the type of network Players observe in a Game
+    name: netType
+    values:
+      - value: "homophil"
+      - value: "heterophil"
+      - value: "richvis"
+      - value: "poorvis"
+      - value: "segregated"
+      - value: "representative"
+treatments:
+  - desc: "Two-player Game"
+    factors:
+      playerCount: 2
+      netType: "homophil"
+    name: 2 Players
+  - desc: "Four-player Game"
+    factors:
+      playerCount: 4
+      netType: "homophil"
+    name: 4 Players
+  - desc: "Homophilous"
+    factors:
+      playerCount: 24
+      netType: "homophil"
+    name: Homophilous
+  - desc: "Heterophilous"
+    factors:
+      playerCount: 24
+      netType: "heterophil"
+    name: Heterophilous
+  - desc: "Richvis"
+    factors:
+      playerCount: 24
+      netType: "richvis"
+    name: Richvis
+  - desc: "Poorvis"
+    factors:
+      playerCount: 24
+      netType: "poorvis"
+    name: Poorvis
+  - desc: "Segregated"
+    factors:
+      playerCount: 24
+      netType: "segregated"
+    name: Segregated
+  - desc: "Representative"
+    factors:
+      playerCount: 24
+      netType: "representative"
+    name: Representative

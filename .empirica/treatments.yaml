@@ -4,6 +4,7 @@ factors:
     values:
       - value: 2
       - value: 4
+      - value: 9
       - value: 24
   - desc: the type of network Players observe in a Game
     name: netType
@@ -14,17 +15,23 @@ factors:
       - value: "poorvis"
       - value: "segregated"
       - value: "representative"
+      - value: "complete"
 treatments:
   - desc: "Two-player Game"
     factors:
       playerCount: 2
-      netType: "homophil"
+      netType: "complete"
     name: 2 Players
   - desc: "Four-player Game"
     factors:
       playerCount: 4
-      netType: "homophil"
+      netType: "complete"
     name: 4 Players
+  - desc: "Nine-player Game"
+    factors:
+      playerCount: 9
+      netType: "complete"
+    name: 9 Players
   - desc: "Homophilous"
     factors:
       playerCount: 24

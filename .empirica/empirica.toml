@@ -1,9 +1,9 @@
 name = "redistribution"
 
 [tajriba.auth]
-srtoken = "yDbYIxhcPlzgkuWr"
+srtoken = "QHYCOVHDLDGddjCI"
 
 [[tajriba.auth.users]]
 name = "Admin"
 username = "admin"
-password = "psrxsyQf"
+password = "oAtwHGGM"

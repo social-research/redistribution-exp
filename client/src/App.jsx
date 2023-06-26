@@ -9,6 +9,7 @@ import { Quiz } from "./intro/Quiz";
 import { FinalOutcome } from "./exit/FinalOutcome";
 import { ExitSurvey } from "./exit/ExitSurvey";
 import { PaymentInfo } from "./exit/PaymentInfo";
+import { Sorry } from "./exit/Sorry";
 
 export default function App() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -25,12 +26,14 @@ export default function App() {
     return [FinalOutcome, ExitSurvey, PaymentInfo];
   }
 
+
   return (
     <EmpiricaParticipant url={url} ns={playerKey} modeFunc={EmpiricaClassic}>
       <div className="h-screen relative">
         <EmpiricaMenu position="bottom-left" />
         <div className="h-full overflow-auto">
-          <EmpiricaContext consent={GameConsent} introSteps={introSteps} exitSteps={exitSteps}>
+          <EmpiricaContext consent={GameConsent} introSteps={introSteps} 
+              exitSteps={exitSteps}>
             <Game />
           </EmpiricaContext>
         </div>
@@ -38,3 +41,6 @@ export default function App() {
     </EmpiricaParticipant>
   );
 }
+
+
+//exitSteps={({ game, player }) =>  player.get("ended") === "finished" ? {exitSteps} : [Sorry]}>

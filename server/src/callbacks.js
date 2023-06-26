@@ -1,6 +1,6 @@
 import { ClassicListenersCollector } from "@empirica/core/admin/classic";
 import { numRounds, conversionRate,
-         richscore, poorscore, two_net, four_net, 
+         richscore, poorscore, two_net, four_net, nine_net,
          homophil_net, heterophil_net,
          richvis_net, poorvis_net,
          segregated_net, representative_net} from "./constants";
@@ -19,29 +19,28 @@ Empirica.onGameStart(({ game }) => {
   const playerCount = treatment.playerCount;
   const netType = treatment.netType;
 
-  const playerIds = [] 
-  for (var i = 0; i < playerCount; i++) {
-    playerIds[i] = game.players[i].id
-  };
-  //const playerIds = _.pluck(game.players, "id");  // FIX!!!!!!
-  //console.log(playerIds) // REMOVE!!!
-  
+  // TO DO !!! - Make sure order does not get messed up - check correct neighbor assignment  
   const awards = getAwards(playerCount)
-  //console.log("awards:", awards); // REMOVE!!!
-  
-  // Set players' award (initial score) and currentScore and network 
+  const playerIds = [] 
   game.players.forEach((player, i) => {
+    // Keep in same order as awards to do the correct network assignment
+    player.set("playerID", player.id);
+    player.set("playerIndex", i);
+    playerIds[i] = player.id;
     player.set("award", awards[i]);
-    player.set("currentScore", player.get("award"));
+    player.set("currentScore", awards[i]);
     player.set("currentVote", null);
     player.set("bonus", 0);
-    
+  });
+  
+  // Set neighbors
+  game.players.forEach((player, i) => {
     const alterIds = getAlters(i, playerIds, netType, playerCount);
     player.set("alterIds", alterIds);
     //console.log(player.get("alterIds")); // REMOVE!!!
   });
 
-  // Add round and stages - FIX!!! Uncaught ReferenceError: stage is not defined
+  // Add round and stages
   for (let i = 0; i < numRounds; i++) {
     const round = game.addRound({
       name: `Round ${i+1}`,
@@ -50,7 +49,7 @@ Empirica.onGameStart(({ game }) => {
   }
 
   // Keep track of median vote
-  game.set("currentMedianVote", 0);
+  game.set("currentMedianVote", null);
 });
 
 
@@ -123,6 +122,8 @@ function getAlters(playerIndex, playerIds, netType, playerCount) {
     alterIds = two_net[playerIndex].map(i => playerIds[i]);
   } else if (playerCount === 4) {
     alterIds = four_net[playerIndex].map(i => playerIds[i]);
+  } else if (playerCount === 9) {
+    alterIds = nine_net[playerIndex].map(i => playerIds[i]);
   } else if (netType === "homophil") {
     alterIds = homophil_net[playerIndex].map(i => playerIds[i]);
   } else if (netType === "heterophil") {
@@ -153,7 +154,7 @@ function getAwards(playerCount) {
   
   const awards = {};
   for (var i = 0; i < playerCount; i++) {
-    if (i % 2 == 0) {
+    if (i % 2 === 0) {
       awards[i] = Math.round(( 1 + randomvar1[i] ) * poorscore);
     } else {
       awards[i] = Math.round(( 1 + randomvar2[i] ) * richscore);

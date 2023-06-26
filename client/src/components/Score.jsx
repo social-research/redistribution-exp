@@ -12,16 +12,16 @@ export function Score(player, onChange) {
 
   return (
     <div key={player.id}>
-      <div className="flex items-center space-x-6">
+      <div className="flex items-center justify-center pd-3 space-x-0.5">
 
         <div className="flex flex-col items-center space-y-0.5">
-          <div className="h-12 w-12 shrink-0">
+          <div className="h-10 w-10 shrink-0">
             <Avatar player={player} />
           </div>
 
-          <svg width="50" height="240">
-            <rect x="5" y={230 - score} width="40" height={score} fill="LightSlateGray" />
-            <rect x="5" y={230 - award} width="40" height={award} fill="none" stroke="black" strokeWidth="1" />
+          <svg width="60" height="240">
+            <rect x="13" y={230 - score} width="34" height={score} fill="SlateGray" />
+            <rect x="13" y={230 - award} width="34" height={award} fill="none" stroke="black" strokeWidth="1" />
           </svg>
 
           <h1 className="text-xs font-semibold uppercase tracking-wider leading-none text-gray-400">

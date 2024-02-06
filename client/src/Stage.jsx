@@ -7,6 +7,7 @@ import { Loading } from "@empirica/core/player/react";
 import React from "react";
 import { Vote } from "./stages/Vote";
 
+
 export function Stage() {
   const player = usePlayer();
   const players = usePlayers();
@@ -19,7 +20,7 @@ export function Stage() {
 
     return (
       <div className="text-center text-gray-400 pointer-events-none">
-        Please wait for other players.
+        Please wait for other participants.
       </div>
     );
   }

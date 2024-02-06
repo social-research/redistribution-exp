@@ -1,3 +1,4 @@
+import React from "react";
 import { Consent } from "@empirica/core/player/react";
 
 export function GameConsent({ onConsent }) {
@@ -14,6 +15,7 @@ export function GameConsent({ onConsent }) {
       Clicking on the I AGREE button indicates that you are at
       least 18 years of age, and agree to participate voluntarily."
       buttonText="I AGREE"
+      onConsent={onConsent}
     />
   );
 }

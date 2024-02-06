@@ -3,13 +3,18 @@ import React from "react";
 import { Button } from "../components/Button";
 import { Score } from "../components/Score";
 
-const convert100 = "$1.00"
+const convert100 = "$2.00"
 
 export function FinalOutcome({ next }) {
   
   const game = useGame();
   const player = usePlayer();
   const players = usePlayers();
+
+  function handleSubmit() {
+    player.stage.set("submit", true);
+  }
+
 
   // Use the same setup as in Vote to render final result - TO DO!!!!
 
@@ -49,7 +54,7 @@ export function FinalOutcome({ next }) {
         </p>
         <br />
         <br />
-        <Button handleClick={next} autoFocus>
+        <Button handleClick={handleSubmit} autoFocus>
           <p>Next</p>
         </Button>
     </div>

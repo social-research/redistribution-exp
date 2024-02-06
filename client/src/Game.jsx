@@ -1,4 +1,4 @@
-import { Chat, useGame } from "@empirica/core/player/classic/react";
+import { useGame } from "@empirica/core/player/classic/react";
 
 import React from "react";
 import { Profile } from "./Profile";
@@ -19,8 +19,3 @@ export function Game() {
   );
 }
 
-// Remove Chat as not needed in this game - TO DO !!!
-// Need to add visualization of all observed - TO DO !!!
-//      <div className="h-full w-128 border-l flex justify-center items-center">
-//<Chat scope={game} attribute="chat" />
-//</div>

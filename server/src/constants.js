@@ -1,10 +1,10 @@
 // Fixed treatment parameters
-
 export const numRounds = 3
-export const conversionRate = 0.01
+export const durRound = 300  // 300 seconds - UPDATE TO 30 seconds!!!
+export const conversionRate = 0.02
 
 // High and low wealth
-
+// We will assume 15 poor, 9 rich
 export const richscore = 200
 export const poorscore = 20
 

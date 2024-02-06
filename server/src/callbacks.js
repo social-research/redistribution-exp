@@ -1,5 +1,5 @@
 import { ClassicListenersCollector } from "@empirica/core/admin/classic";
-import { numRounds, conversionRate,
+import { numRounds, durRound, conversionRate,
          richscore, poorscore, two_net, four_net, nine_net,
          homophil_net, heterophil_net,
          richvis_net, poorvis_net,
@@ -45,7 +45,7 @@ Empirica.onGameStart(({ game }) => {
     const round = game.addRound({
       name: `Round ${i+1}`,
     });
-    round.addStage({ name: "vote", duration: 300 }); // 300 seconds - UPDATE TO 30 seconds
+    round.addStage({ name: "vote", duration: durRound }); 
   }
 
   // Keep track of median vote
@@ -105,7 +105,7 @@ Empirica.onGameEnded(({ game }) => {
   console.log("The game", game.id, "has ended");
 
   game.players.forEach(player => {
-    const bonus = Math.round(player.get("currentScore") * conversionRate * 100) / 100;
+    const bonus = (Math.round(player.get("currentScore") * conversionRate * 100) / 100).toFixed(2);
     player.set("bonus", bonus);
   });
 });
@@ -146,18 +146,19 @@ function getAlters(playerIndex, playerIds, netType, playerCount) {
 function getAwards(playerCount) {
 
   // Include random variation of +/- 10%
-  const randomvar1 = [-0.1, -0.08, -0.06, -0.04, -0.02, 0, 0, 0.02, 0.04, 0.06, 0.08, 0.1];
-  //const randomvar1 = _.shuffle([-0.1, -0.08, -0.06, -0.04, -0.02, 0, 0, 0.02, 0.04, 0.06, 0.08, 0.1]); //FIX!!!!
+  const randomr = [-0.1, -0.075, -0.05, -0.025, 0, 0.025, 0.05, 0.075, 0.1];
+  //const randomr = _.shuffle([-0.1, -0.075, -0.05, -0.025, 0, 0.025, 0.05, 0.075, 0.1]); //FIX!!!!
 
-  const randomvar2 = Object.assign([], randomvar1); 
-  //const randomvar2 = _.shuffle(randomvar1)); // clone randomvar1 FIX!!!!!!!!
+  const randomp = [-0.1, -0.1, -0.1, -0.05, -0.05, -0.05, 0, 0, 0, 0.05, 0.05, 0.05, 0.1, 0.1, 0.1]; 
+  //const randomp = _.shuffle([-0.1, -0.1, -0.1, -0.05, -0.05, -0.05, 0, 0, 0, 0.05, 0.05, 0.05, 0.1, 0.1, 0.1])); // clone randomvar1 FIX!!!!!!!!
   
+  // First 15 poor, last 9 rich - UPDATE!!!
   const awards = {};
   for (var i = 0; i < playerCount; i++) {
-    if (i % 2 === 0) {
-      awards[i] = Math.round(( 1 + randomvar1[i] ) * poorscore);
+    if (i < 15) {
+      awards[i] = Math.round(( 1 + randomp[i] ) * poorscore);
     } else {
-      awards[i] = Math.round(( 1 + randomvar2[i] ) * richscore);
+      awards[i] = Math.round(( 1 + randomr[i] ) * richscore);
     }
   };
   return awards;

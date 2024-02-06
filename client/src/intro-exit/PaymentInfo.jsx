@@ -6,8 +6,6 @@ import { Button } from "../components/Button";
 export function PaymentInfo({ next }) {
 
   const player = usePlayer();
-
-  // Show bonus in format $X.XX  - TO DO !!!
   
   return (
     <div className="py-8 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
